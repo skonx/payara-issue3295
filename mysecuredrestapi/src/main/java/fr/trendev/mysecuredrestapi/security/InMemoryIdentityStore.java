@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 import javax.security.enterprise.credential.UsernamePasswordCredential;
 import javax.security.enterprise.identitystore.CredentialValidationResult;
 import static javax.security.enterprise.identitystore.CredentialValidationResult.INVALID_RESULT;
@@ -21,22 +22,24 @@ import javax.security.enterprise.identitystore.IdentityStore;
  *
  * @author jsie
  */
-//@ApplicationScoped
+@ApplicationScoped
 public class InMemoryIdentityStore implements IdentityStore {
 
     private final Map<String, Set<String>> accounts = new HashMap<>();
     private final Map<String, String> passwords = new TreeMap<>();
 
+    private final String email = "jsie@mail.com";
+
     @PostConstruct
     public void init() {
-        accounts.put("hank-moody@californication.us",
+        accounts.put(email,
                 new HashSet<>(Arrays.asList("Special")));
-        passwords.put("hank-moody@californication.us", "PASSWORD");
+        passwords.put(email, "123456");
     }
 
     @Override
     public int priority() {
-        return 10;
+        return 100;
     }
 
     public CredentialValidationResult validate(

@@ -5,20 +5,24 @@
  */
 package fr.trendev.mysecuredrestapi.security;
 
+import javax.annotation.security.DeclareRoles;
+import javax.enterprise.context.ApplicationScoped;
+import javax.security.enterprise.authentication.mechanism.http.BasicAuthenticationMechanismDefinition;
+
 /**
  *
  * @author jsie
  */
-//@DeclareRoles({
-//    "Special"
-//})
+@DeclareRoles({
+    "Special"
+})
 ////@FormAuthenticationMechanismDefinition(
 ////        loginToContinue =
 ////        @LoginToContinue(
 ////                loginPage = "/login.html",
 ////                errorPage = "/login-error.html"
 ////        ))
-//@BasicAuthenticationMechanismDefinition(realmName = "foo-bar")
-//@ApplicationScoped
+@BasicAuthenticationMechanismDefinition(realmName = "foo-bar")
+@ApplicationScoped
 public class DefaultSecurityConfig {
 }

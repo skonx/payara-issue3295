@@ -5,6 +5,7 @@
  */
 package fr.trendev.mysecuredrestapi;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -23,7 +24,7 @@ import javax.ws.rs.core.Response;
 public class MySimpleService {
 
     @GET
-    @Path("hello-world")
+    @Path("helloworld")
     @Produces(MediaType.APPLICATION_JSON)
     public Response helloWorld() {
         return Response.ok(this.createMsg("Hello World")).build();
@@ -32,6 +33,7 @@ public class MySimpleService {
     @GET
     @Path("special")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("Special")
     public Response somethingSpecial() {
         return Response.
                 ok(this.createMsg("You are someone very special ;)")).
