@@ -28,7 +28,7 @@ public class InMemoryIdentityStore implements IdentityStore {
     private final Map<String, Set<String>> accounts = new HashMap<>();
     private final Map<String, String> passwords = new TreeMap<>();
 
-    public final String email = "jsie@mail.com";
+    private final String email = "jsie@mail.com";
 
     @PostConstruct
     public void init() {
