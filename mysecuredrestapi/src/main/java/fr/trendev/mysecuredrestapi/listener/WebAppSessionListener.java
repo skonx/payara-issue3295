@@ -1,6 +1,5 @@
 package fr.trendev.mysecuredrestapi.listener;
 
-import fr.trendev.mysecuredrestapi.security.InMemoryIdentityStore;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -26,11 +25,6 @@ public class WebAppSessionListener implements HttpSessionListener,
     private static final DateFormat df = DateFormat.getDateTimeInstance(
             DateFormat.FULL, DateFormat.FULL);
 
-    /**
-     * Adds the session in the tracker. No user provided (use empty string).
-     *
-     * @param se the creation event
-     */
     @Override
     public void sessionCreated(HttpSessionEvent se) {
         HttpSession hs = se.getSession();
@@ -41,17 +35,6 @@ public class WebAppSessionListener implements HttpSessionListener,
                 });
     }
 
-    /**
-     * Removes the session from the tracker's index. If the listener is the
-     * origin of the session destruction, an object is returned from the
-     * previous removal. The listener then call the remove method of the
-     * tracker.
-     *
-     * @see ActiveSessionTracker#remove(java.lang.String,
-     * javax.servlet.http.HttpSession)
-     *
-     * @param se the destruction event
-     */
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
         HttpSession hs = se.getSession();
@@ -62,22 +45,14 @@ public class WebAppSessionListener implements HttpSessionListener,
                 });
     }
 
-    /**
-     * Drops the session id from the tracker's index and inserts it with the
-     * association user's email (or an empty string) in the tracker.
-     *
-     * @param se the change event
-     * @param oldSessionId the old session id
-     */
     @Override
     public void sessionIdChanged(HttpSessionEvent se, String oldSessionId) {
         HttpSession hs = se.getSession();
         LOG.log(Level.INFO,
-                "Session [{0}] has been changed to [{1}] and email [{2}] has been inserted in the tracker index on {3}",
+                "Session [{0}] has been changed to [{1}] on {2}",
                 new Object[]{
                     oldSessionId,
                     hs.getId(),
-                    InMemoryIdentityStore.email,
                     df.format(new Date())
                 });
     }
