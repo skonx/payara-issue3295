@@ -45,8 +45,7 @@ public class OverallFilter implements Filter {
         Principal user = req.getUserPrincipal();
 
         //Basic authentication won't create a session
-        //Forces HttpSession creation
-        HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession();
 
         LOG.log(Level.INFO, "{3} / [{1}] has requested {2} {0}",
                 new Object[]{req.getRequestURL(), (user != null) ? user.
@@ -62,8 +61,11 @@ public class OverallFilter implements Filter {
              */
             if (user != null && session != null) {
                 long time = System.currentTimeMillis();
-                LOG.log(Level.INFO, "Updating the timestamp on {0}", new Date(
-                        time));
+                LOG.log(Level.INFO,
+                        "Updating the timestamp in session {1} on {0}",
+                        new Object[]{
+                            new Date(time), session.getId()
+                        });
                 session.
                         setAttribute("RQT_TIMESTAMP", time);
             }
