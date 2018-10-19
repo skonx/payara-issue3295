@@ -5,7 +5,6 @@ package fr.trendev.mysecuredrestapi.filter;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Date;
@@ -56,13 +55,13 @@ public class OverallFilter implements Filter {
             /**
              * Adds a timestamp in the current session in order to store the
              * last access time and not the last access time of the previous
-             * request.
+             * request...
              *
-             * @see
              */
             if (user != null && session != null) {
                 long time = System.currentTimeMillis();
-                LOG.log(Level.INFO, "Updating the timestamp{0}", new Date(time));
+                LOG.log(Level.INFO, "Updating the timestamp on {0}", new Date(
+                        time));
                 session.
                         setAttribute("RQT_TIMESTAMP", time);
             }
