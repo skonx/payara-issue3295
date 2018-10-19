@@ -44,7 +44,9 @@ public class OverallFilter implements Filter {
 
         Principal user = req.getUserPrincipal();
 
-        HttpSession session = req.getSession(false);
+        //Basic authentication won't create a session
+        //Forces HttpSession creation
+        HttpSession session = req.getSession(true);
 
         LOG.log(Level.INFO, "{3} / [{1}] has requested {2} {0}",
                 new Object[]{req.getRequestURL(), (user != null) ? user.

@@ -9,8 +9,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import javax.annotation.security.DeclareRoles;
 import javax.enterprise.context.ApplicationScoped;
-import javax.security.enterprise.authentication.mechanism.http.FormAuthenticationMechanismDefinition;
-import javax.security.enterprise.authentication.mechanism.http.LoginToContinue;
+import javax.security.enterprise.authentication.mechanism.http.BasicAuthenticationMechanismDefinition;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
@@ -21,14 +20,15 @@ import javax.ws.rs.core.Application;
 @DeclareRoles({
     "Special"
 })
-@FormAuthenticationMechanismDefinition(
-        loginToContinue =
-        @LoginToContinue(
-                useForwardToLogin = false,
-                loginPage = "/login.html",
-                errorPage = "/login-error.html"
-        ))
-//@BasicAuthenticationMechanismDefinition(realmName = "foo-bar")
+//@FormAuthenticationMechanismDefinition(
+//        loginToContinue =
+//        @LoginToContinue(
+//                useForwardToLogin = false,
+//                loginPage = "/login.html",
+//                errorPage = "/login-error.html"
+//        ))
+//realName is not important...
+@BasicAuthenticationMechanismDefinition(realmName = "foo-bar")
 @ApplicationScoped
 @ApplicationPath("api")
 public class JAXRSConfiguration extends Application {
